@@ -17,9 +17,7 @@ function addSomePromises(somePromise) {
         if(somePromise.then(res=>res)){
             resolve(res)
         }
-        else{reject()}
-            
-        
+        else{reject()}  
     })
 }
 module.exports = {giveItBackLater,promiseToGiveItBackLater, addSomePromises }
