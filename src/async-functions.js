@@ -6,18 +6,26 @@ function giveItBackLater(value, callback) {
 }
 
 function promiseToGiveItBackLater(value) {
+    function myOtherFunction(givenValue) {
+        return givenValue
+    }
+    const myValue = giveItBackLater(value,myOtherFunction)
     return new Promise((resolve, reject) => {
-        resolve(giveItBackLater(value, callback))
+        
+        if(myValue){
+            resolve(myValue)
+        }
+        reject()
+        
     })
 }
 
 
 function addSomePromises(somePromise) {
+    const result = somePromise.then(res=>res)
     return new Promise((resolve, reject)=> { 
-        if(somePromise.then(res=>res)){
-            resolve(res)
-        }
-        else{reject()}  
+        resolve(result.then(res=>res))        
+        reject(result.then(res=>res))  
     })
 }
 module.exports = {giveItBackLater,promiseToGiveItBackLater, addSomePromises }
